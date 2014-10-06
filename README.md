@@ -14,7 +14,7 @@ I just found out about <a href='https://code.google.com/p/logstalgia/'>Logstalgi
 - <a href='http://www.jfree.org/jcommon/index.php'>JCommon</a>
 
 ## Citation
-Christopher P. Lee, Jason Trost, Nicholas Gibbs, Raheem Beyah, John A. Copeland, "<a href='http://www.chrisleephd.us/papers/Lee - Visual Firewall- Real-time Network Security Monitor.pdf'>VisualFirewall: A Firewall Visualization Tool for Network Management and Security Analysis</a>", VizSEC 2005, October 2005.
+Christopher P. Lee, Jason Trost, Nicholas Gibbs, Raheem Beyah, John A. Copeland, "<a href='http://www.chrisleephd.us/papers/visual_firewall.pdf'>VisualFirewall: A Firewall Visualization Tool for Network Management and Security Analysis</a>", VizSEC 2005, October 2005.
 
 ## Screenshots ##
 <ul>
