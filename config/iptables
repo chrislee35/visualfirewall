@@ -1,0 +1,35 @@
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:LOGDROP - [0:0]
+-A LOGDROP -j LOG --log-prefix "DROP " --log-level debug --log-tcp-options --log-ip-options
+-A LOGDROP -j DROP
+:LOGACCEPT - [0:0]
+-A LOGACCEPT -j LOG --log-prefix "ACCEPT " --log-level debug --log-tcp-options --log-ip-options
+-A LOGACCEPT -j ACCEPT
+:LOGOUT - [0:0]
+-A LOGOUT -j LOG --log-prefix "ACCEPT " --log-level debug --log-tcp-options --log-ip-options
+-A LOGOUT -j ACCEPT
+:OUTPUT -  [0:0]
+-A OUTPUT -j LOGOUT
+:RH-Firewall-1-INPUT - [0:0]
+-A INPUT -j RH-Firewall-1-INPUT
+-A FORWARD -j RH-Firewall-1-INPUT
+-A RH-Firewall-1-INPUT -d 127.0.0.0/255.0.0.0 -i ! lo -p tcp -j DROP
+-A RH-Firewall-1-INPUT -d 255.255.255.255 -j DROP
+
+-A RH-Firewall-1-INPUT -i lo -j ACCEPT
+-A RH-Firewall-1-INPUT -p icmp --icmp-type 0 -j LOGACCEPT
+-A RH-Firewall-1-INPUT -p icmp --icmp-type 3 -j LOGACCEPT
+-A RH-Firewall-1-INPUT -p icmp --icmp-type 11 -j LOGACCEPT
+-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 137:139 -j DROP 
+-A RH-Firewall-1-INPUT -p udp -m udp --dport 137:139 -j DROP 
+-A RH-Firewall-1-INPUT -p 50 -j ACCEPT
+-A RH-Firewall-1-INPUT -p 51 -j ACCEPT
+-A RH-Firewall-1-INPUT -p udp --dport 5353 -d 224.0.0.251 -j ACCEPT
+-A RH-Firewall-1-INPUT -m state --state ESTABLISHED,RELATED -j LOGACCEPT
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport ssh -j LOGACCEPT
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport http -j LOGACCEPT
+-A RH-Firewall-1-INPUT -m state --state NEW -m tcp -p tcp --dport https -j LOGACCEPT
+-A RH-Firewall-1-INPUT -j LOGDROP
+COMMIT
